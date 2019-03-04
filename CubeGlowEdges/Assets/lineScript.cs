@@ -6,20 +6,23 @@ public class lineScript : MonoBehaviour
 {
     Mesh myMesh;
     LineRenderer lr;
-    // Start is called before the first frame update
+    
+
     void Start()
     {
-        myMesh = GetComponent<MeshFilter>().sharedMesh;
+        myMesh = GetComponent<MeshFilter>().mesh;
         lr = GetComponent<LineRenderer>();
         Vector3[] meshList = myMesh.vertices;
         lr.positionCount = myMesh.vertexCount;
-        
+
+        UpdateLine(meshList);
+    }
+
+    private void UpdateLine(Vector3[] meshList)
+    {
         for (int i = 0; i < myMesh.vertexCount; i++)
         {
-            //if (i !=0 )
-            {
-                lr.SetPosition(i, new Vector3 (meshList[i].x, meshList[i].y, meshList[i].z));
-            }
+                lr.SetPosition(i, meshList[i]);
         }
     }
 
